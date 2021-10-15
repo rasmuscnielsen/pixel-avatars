@@ -1,4 +1,5 @@
 import {computed, ref, reactive} from 'vue'
+import Web3 from 'web3/dist/web3.min.js'
 
 export default function useWalletState() {
     const address = ref(null)
@@ -10,8 +11,18 @@ export default function useWalletState() {
         isConnected,
         tokens,
 
-        connect() {
-            address.value = '0xasdasoiqwejq12312wdiqwd'
+        async connect() {
+            if (! window.ethereum) {
+                alert('MetaMask not detected. Please try again from a MetaMask enabled browser.')
+
+                return;
+            }
+
+            const web3 = new Web3(window.ethereum);
+
+            address.value = (await web3.eth.requestAccounts())[0]
+
+            // TODO - detect tokens from genesis contract
             tokens.value = [123, 234, 345, 456]
         },
 

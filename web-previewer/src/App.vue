@@ -14,23 +14,25 @@ const walletState = useWalletState()
 
 <template>
     <div class="min-h-screen flex flex-col sm:flex-row">
-        <div class="sm:w-2/5 bg-white flex flex-col items-center space-y-10 py-10 px-4">
-            <div class="flex justify-between items-center w-full max-w-md">
-                <DaoLogo class="w-16 h-16 rounded-full shadow-md" />
+        <div class="sm:w-2/5 bg-white py-10 px-4 flex">
+            <div class="flex flex-col items-center justify-center space-y-10 w-full max-w-md mx-auto">
+                <div class="flex justify-between items-center w-full">
+                    <DaoLogo class="w-16 h-16 rounded-full shadow-md" />
 
-                <WalletConnect :state="walletState" />
+                    <WalletConnect :state="walletState" />
+                </div>
+
+                <ClaimControls
+                    :preview-state="previewState"
+                    :wallet-state="walletState"
+                    class="w-full max-w-md"
+                />
+
+                <PreviewControls
+                    :state="previewState"
+                    class="w-full max-w-md"
+                />
             </div>
-
-            <ClaimControls
-                :preview-state="previewState"
-                :wallet-state="walletState"
-                class="w-full max-w-md"
-            />
-
-            <PreviewControls
-                :state="previewState"
-                class="w-full max-w-md"
-            />
         </div>
 
         <div class="sm:w-3/5 bg-gray-100 border-l border-gray-200">
